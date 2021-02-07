@@ -1,0 +1,59 @@
+<div class="backdrop"></div>
+<header class="main-header">
+  <button id="side-menu-toggle">Menu</button>
+</header>
+
+<nav class="mobile-nav">
+  <ul class="mobile-nav__item-list">
+    <li class="mobile-nav__item">
+      <a class="<%= path === '/' ? 'active' : '' %>" href="/">Sklep</a>
+    </li>
+    <li class="mobile-nav__item">
+      <a class="<%= path === '/products' ? 'active' : '' %>" href="/products"
+        >Produkty</a
+      >
+    </li>
+    <% if (isAuthenticated) { %>
+    <li class="mobile-nav__item">
+      <a class="<%= path === '/cart' ? 'active' : '' %>" href="/cart">Koszyk</a>
+    </li>
+    <li class="mobile-nav__item">
+      <a class="<%= path === '/orders' ? 'active' : '' %>" href="/orders"
+        >Zamowienia</a
+      >
+    </li>
+    <li class="mobile-nav__item">
+      <a
+        class="<%= path === '/admin/add-product' ? 'active' : '' %>"
+        href="/admin/add-product"
+        >Dodaj produkt
+      </a>
+    </li>
+    <li class="mobile-nav__item">
+      <a
+        class="<%= path === '/admin/products' ? 'active' : '' %>"
+        href="/admin/products"
+        >Zarządzaj produktami
+      </a>
+    </li>
+    <% } %> <% if (!isAuthenticated) { %>
+    <li class="mobile-nav__item">
+      <a class="<%= path === '/login' ? 'active' : '' %>" href="/login"
+        >Zaloguj</a
+      >
+    </li>
+    <li class="mobile-nav__item">
+      <a class="<%= path === '/signup' ? 'active' : '' %>" href="/signup"
+        >Zarejestruj</a
+      >
+    </li>
+    <% } else { %>
+    <li class="mobile-nav__item">
+      <form action="/logout" method="post">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+        <button type="submit">Wyloguj</button>
+      </form>
+    </li>
+    <% } %>
+  </ul>
+</nav>
